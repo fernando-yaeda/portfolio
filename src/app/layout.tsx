@@ -1,4 +1,6 @@
-import "@/styles/global.css"
+import { ThemeProvider } from "@/components/theme-provider"
+
+import "@/styles/globals.css"
 
 import { Inter } from "next/font/google"
 
@@ -16,7 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
