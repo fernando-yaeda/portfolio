@@ -1,3 +1,5 @@
+import { Icon } from "@/components/icons"
+
 export type SiteConfig = {
   name: string
   description: string
@@ -16,4 +18,10 @@ export type NavItem = {
 
 export type MarketingConfig = {
   navbar: NavItem[]
+}
+
+type Project = {
+  title: string,
+  description: string,
+  techStack: string[]
 }
