@@ -21,7 +21,7 @@ export type MarketingConfig = {
 }
 
 type Project = {
-  title: string,
-  description: string,
+  title: string
+  description: string
   techStack: string[]
 }

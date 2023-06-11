@@ -31,11 +31,12 @@ export async function ProjectCard({
         </CardContent>
 
         <CardFooter className="flex gap-4">
-          {techStack.map((stack) => {
+          {techStack.map((stack, index) => {
             const Icon = TechIconByStack({ stack })
             if (Icon) {
               return (
                 <TeckStackTooltip
+                  key={index}
                   trigger={
                     <Icon className="h-5 w-5 text-muted-foreground hover:text-primary" />
                   }
