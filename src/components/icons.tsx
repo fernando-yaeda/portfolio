@@ -9,15 +9,16 @@ import {
   type Icon as LucideIcon,
 } from "lucide-react"
 import { IconType as ReactIcon } from "react-icons"
-import { DiNodejsSmall, DiReact } from "react-icons/di"
 import {
   SiNestjs,
   SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si"
 
-export type Icon = LucideIcon
+export type Icon = LucideIcon & ReactIcon
 
 export const Icons = {
   logo: Code2,
@@ -29,13 +30,29 @@ export const Icons = {
   laptop: Laptop,
 }
 
-export type TechIcon = ReactIcon
-
 export const TechIcons = {
   typescript: SiTypescript,
   next: SiNextdotjs,
   nest: SiNestjs,
-  react: DiReact,
-  node: DiNodejsSmall,
+  react: SiReact,
+  node: SiNodedotjs,
   tailwind: SiTailwindcss,
+}
+
+export function TechIconByStack({ stack }: { stack: string }) {
+  switch (stack) {
+    case "typescript":
+      return TechIcons.typescript
+    case "next":
+      return TechIcons.next
+    case "nest":
+      return TechIcons.nest
+    case "react":
+      return TechIcons.react
+    case "node":
+      return TechIcons.node
+    case "tailwind":
+      return TechIcons.tailwind
+  }
+  return null
 }

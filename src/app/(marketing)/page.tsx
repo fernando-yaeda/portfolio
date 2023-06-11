@@ -1,11 +1,15 @@
 import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
+import { getProjects } from "@/lib/notion"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/button"
 import { Icons } from "@/components/icons"
+import { ProjectCard } from "@/components/project-card"
 
-export default function IndexPage() {
+export default async function IndexPage() {
+  const projects = await getProjects()
+
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
@@ -54,15 +58,25 @@ export default function IndexPage() {
         </div>
       </section>
       <section
-        id="projects"
+        id="project"
         className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
       >
         <div className="mx-auto max-w-[58rem] flex flex-col items-center space-y-4 text-center">
           <h2 className="font-extrabold text-4xl lg:text-5xl">Projects</h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
             Explore a collection of my recent projects showcasing my expertise
-            in NestJS, ReactJS, NextJS, and PostgreSQL.
+            in NestJS, ReactJS, NextJS, PostgreSQL and more.
           </p>
+        </div>
+        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-width-[64rem] md:grid-cols-3">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              techStack={project.techStack}
+            />
+          ))}
         </div>
       </section>
     </>

@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { Project } from "@/types"
 
-import { TechIcons } from "./icons"
+import { TechIconByStack } from "./icons"
+import TeckStackTooltip from "./stack-tooltip"
 import {
   Card,
   CardContent,
@@ -10,27 +12,41 @@ import {
   CardTitle,
 } from "./ui/card"
 
-export function ProjectCard() {
+type ProjectCardProps = Project
+
+export async function ProjectCard({
+  title,
+  description,
+  techStack,
+}: ProjectCardProps) {
   return (
-    <Card className="relative hover:shadow-lg transition-all cursor-pointer">
-      <CardHeader>
-        <CardTitle className="font-bold">Track It</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription>
-          A habit tracker app, with responsive layout, that you can use to build
-          new habits and follow your progress with beautiful charts.
-        </CardDescription>
-      </CardContent>
-      <CardFooter className="flex gap-2">
-        <TechIcons.nest className="text-muted-foreground " />
-        <TechIcons.next className="text-muted-foreground" />
-        <TechIcons.typescript className="text-muted-foreground" />
-        <TechIcons.tailwind className="text-muted-foreground" />
-      </CardFooter>
-      <Link href={"/"} target="_blank" className="absolute inset-0">
-        <span className="sr-only">View Project</span>
-      </Link>
-    </Card>
+    <Link href={"/"} target="_blank">
+      <Card className="hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer">
+        <CardHeader>
+          <CardTitle className="font-bold">{title}</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <CardDescription>{description}</CardDescription>
+        </CardContent>
+
+        <CardFooter className="flex gap-4">
+          {techStack.map((stack) => {
+            const Icon = TechIconByStack({ stack })
+            if (Icon) {
+              return (
+                <TeckStackTooltip
+                  trigger={
+                    <Icon className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                  }
+                  content={<p>{stack}</p>}
+                />
+              )
+            }
+          })}
+        </CardFooter>
+        <span className="sr-only">View Project Details</span>
+      </Card>
+    </Link>
   )
 }
