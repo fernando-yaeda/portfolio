@@ -4,7 +4,7 @@ export const marketingConfig: MarketingConfig = {
   navbar: [
     {
       title: "Projects",
-      href: "/projects",
+      href: "/project",
     },
     {
       title: "Blog",
