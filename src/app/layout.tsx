@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react"
+
 import { siteConfig } from "@/config/site"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -25,6 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
