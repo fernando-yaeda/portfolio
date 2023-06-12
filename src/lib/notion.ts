@@ -22,13 +22,16 @@ export async function getProjects() {
     },
   })
 
-  // @ts-ignore
-  const projects = response.results.map((res) => res.properties) as ProjectData[]
+  const projects = response.results.map(
+    // @ts-ignore
+    (res) => res.properties
+  ) as ProjectData[]
 
   const formattedProjects: Project[] = projects.map((project) => ({
     title: project.title.title[0].plain_text,
     description: project.description.rich_text[0].plain_text,
     techStack: project.techStack.multi_select.map((stack) => stack.name),
+    imageUrl: project.image?.files[0].file.url,
   }))
 
   return formattedProjects

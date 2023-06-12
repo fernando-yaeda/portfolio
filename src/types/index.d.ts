@@ -24,4 +24,5 @@ type Project = {
   title: string
   description: string
   techStack: string[]
+  imageUrl?: string
 }
