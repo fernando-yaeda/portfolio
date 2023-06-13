@@ -1,14 +1,25 @@
 import Link from "next/link"
+import { Project } from "@/types"
 
 import { siteConfig } from "@/config/site"
-import { getProjects } from "@/lib/notion"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/button"
 import { Icons } from "@/components/icons"
 import { ProjectCard } from "@/components/project-card"
 
-export default async function IndexPage() {
-  const projects = await getProjects()
+export async function getData() {
+  const res = await fetch(`http://localhost:8000/database/query`)
+
+  if (!res.ok) {
+    throw new Error("failed to fetch data")
+  }
+
+  return res.json()
+}
+
+export default async function HomePage() {
+  const data = await getData()
+  const projects: Project[] = data.projects
 
   return (
     <>
@@ -69,14 +80,20 @@ export default async function IndexPage() {
           </p>
         </div>
         <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-width-[64rem] md:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.title}
-              title={project.title}
-              description={project.description}
-              techStack={project.techStack}
-            />
-          ))}
+          {projects &&
+            projects.map((project) => (
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                techStack={project.techStack}
+              />
+            ))}
+        </div>
+        <div className="container flex justify-center">
+          <Link href="/project" className={cn(buttonVariants({ size: "lg" }))}>
+            View all projects
+          </Link>
         </div>
       </section>
     </>

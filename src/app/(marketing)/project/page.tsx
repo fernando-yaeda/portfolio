@@ -1,17 +1,25 @@
 import Image from "next/image"
-import Link from "next/link"
-import { Link2 } from "lucide-react"
+import { Project } from "@/types"
 
-import { getProjects } from "@/lib/notion"
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/button"
 
 export const metadata = {
   title: "Projects",
 }
 
+export async function getData() {
+  const res = await fetch(`http://localhost:8000/database/query`)
+
+  if (!res.ok) {
+    throw new Error("failed to fetch data")
+  }
+
+  return res.json()
+}
+
 export default async function ProjectPage() {
-  const projects = await getProjects()
+  const data = await getData()
+  const projects: Project[] = data.projects
 
   return (
     <div>
@@ -20,28 +28,28 @@ export default async function ProjectPage() {
           {projects.map((project) => (
             <article
               key={project.title}
-              className="h-screen md:h-[calc(100vh-80px)] flex flex-col lg:flex-row px-6 lg:px-0"
+              className="flex h-screen flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
             >
-              <div className="h-1/3 lg:h-full lg:w-1/2 flex lg:flex-1 flex-col justify-center items-center gap-4 px-16">
-                <h2 className="text-3xl lg:text-4xl font-bold">
+              <div className="flex h-1/3 flex-col items-center justify-center gap-4 px-16 lg:h-full lg:w-1/2 lg:flex-1">
+                <h2 className="text-3xl font-bold lg:text-4xl">
                   {project.title}
                 </h2>
 
-                <p className="max-w-[32rem] lg:text-lg text-muted-foreground text-center">
+                <p className="max-w-[32rem] text-center text-muted-foreground lg:text-lg">
                   {project.description}
                 </p>
 
                 <Button>View Project</Button>
               </div>
 
-              <div className="h-2/3 lg:h-full lg:w-1/2 flex lg:flex-1 justify-start items-end lg:pb-10">
+              <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">
                 {project.imageUrl && (
-                  <div className="relative w-full h-full rounded-t-2xl lg:rounded-l-2xl drop-shadow-xl">
+                  <div className="relative h-full w-full rounded-t-2xl drop-shadow-xl lg:rounded-l-2xl">
                     <Image
                       src={project.imageUrl}
                       alt={project.title}
                       fill
-                      className="object-cover object-left-top rounded-t-2xl lg:rounded-l-2xl"
+                      className="rounded-t-2xl object-cover object-left-top lg:rounded-l-2xl"
                     />
                   </div>
                 )}
