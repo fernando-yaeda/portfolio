@@ -1,4 +1,5 @@
 import {
+  ChevronLeft,
   Code2,
   Github,
   Laptop,
@@ -28,6 +29,7 @@ export const Icons = {
   sun: Sun,
   moon: Moon,
   laptop: Laptop,
+  navigateBack: ChevronLeft,
 }
 
 export const TechIcons = {
