@@ -1,13 +1,13 @@
 import Image from "next/image"
 import { Project } from "@/types"
 
-import { Button } from "@/components/button"
+import Link from "next/link"
 
 export const metadata = {
   title: "Projects",
 }
 
-export async function getData() {
+async function getProjects() {
   const res = await fetch(`http://localhost:8000/database/query`)
 
   if (!res.ok) {
@@ -18,7 +18,7 @@ export async function getData() {
 }
 
 export default async function ProjectPage() {
-  const data = await getData()
+  const data = await getProjects()
   const projects: Project[] = data.projects
 
   return (
@@ -39,7 +39,7 @@ export default async function ProjectPage() {
                   {project.description}
                 </p>
 
-                <Button>View Project</Button>
+                <Link href={`/project/${project.title}`}>View Project</Link>
               </div>
 
               <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">

@@ -27,7 +27,7 @@ export function Navbar({ items }: NavbarProps) {
           <nav className="hidden gap-6 md:flex">
             {items.map((item) => (
               <Link
-                key={item.href}
+                key={item.title}
                 href={item.disabled ? "#" : item.href}
                 className={cn(
                   "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",

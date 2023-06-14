@@ -7,7 +7,7 @@ import { Button, buttonVariants } from "@/components/button"
 import { Icons } from "@/components/icons"
 import { ProjectCard } from "@/components/project-card"
 
-export async function getData() {
+async function getProjects() {
   const res = await fetch(`http://localhost:8000/database/query`)
 
   if (!res.ok) {
@@ -18,14 +18,14 @@ export async function getData() {
 }
 
 export default async function HomePage() {
-  const data = await getData()
+  const data = await getProjects()
   const projects: Project[] = data.projects
 
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-        <div className="container h-full max-w-[64rem] flex flex-col justify-center items-center text-center gap-4">
-          <h1 className="font-extrabold text-4xl lg:text-5xl">
+        <div className="container flex h-full max-w-[64rem] flex-col items-center justify-center gap-4 text-center">
+          <h1 className="text-4xl font-extrabold lg:text-5xl">
             Hi, I&apos;m Fernando Yaeda.
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
@@ -72,14 +72,14 @@ export default async function HomePage() {
         id="project"
         className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
       >
-        <div className="mx-auto max-w-[58rem] flex flex-col items-center space-y-4 text-center">
-          <h2 className="font-extrabold text-4xl lg:text-5xl">Projects</h2>
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+          <h2 className="text-4xl font-extrabold lg:text-5xl">Projects</h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
             Explore a collection of my recent projects showcasing my expertise
             in NestJS, ReactJS, NextJS, PostgreSQL and more.
           </p>
         </div>
-        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-width-[64rem] md:grid-cols-3">
+        <div className="md:max-width-[64rem] mx-auto grid justify-center gap-4 sm:grid-cols-2 md:grid-cols-3">
           {projects &&
             projects.map((project) => (
               <ProjectCard

@@ -21,7 +21,7 @@ export async function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Link href={"/"} target="_blank">
-      <Card className="hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer">
+      <Card className="cursor-pointer transition-all hover:-translate-y-1 hover:shadow-xl">
         <CardHeader>
           <CardTitle className="font-bold">{title}</CardTitle>
         </CardHeader>
