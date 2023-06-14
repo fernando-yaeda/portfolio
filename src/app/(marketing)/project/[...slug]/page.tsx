@@ -1,6 +1,6 @@
-import { Project, ProjectDetails } from "@/types"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+import { Project, ProjectDetails } from "@/types"
 
 interface ProjectPageProps {
   params: {

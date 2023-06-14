@@ -1,7 +1,6 @@
 import Image from "next/image"
-import { Project } from "@/types"
-
 import Link from "next/link"
+import { Project } from "@/types"
 
 export const metadata = {
   title: "Projects",

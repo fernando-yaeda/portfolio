@@ -24,7 +24,7 @@ export default async function HomePage() {
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-        <div className="container flex h-full max-w-[64rem] flex-col items-center justify-center gap-4 text-center">
+        <div className="container flex h-full max-w-[64rem]  flex-col items-center justify-center gap-4 text-center">
           <h1 className="text-4xl font-extrabold lg:text-5xl">
             Hi, I&apos;m Fernando Yaeda.
           </h1>

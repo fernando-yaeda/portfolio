@@ -4,7 +4,6 @@ import { siteConfig } from "@/config/site"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.css"
-
 import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
