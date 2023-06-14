@@ -8,7 +8,7 @@ export const metadata = {
 }
 
 async function getProjects() {
-  const res = await fetch(`http://localhost:8000/database/query`)
+  const res = await fetch(`https://notion-proxy.onrender.com/database/query`)
 
   if (!res.ok) {
     throw new Error("failed to fetch data")

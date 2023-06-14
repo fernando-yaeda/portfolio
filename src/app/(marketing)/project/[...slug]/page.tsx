@@ -9,7 +9,7 @@ interface ProjectPageProps {
 }
 
 async function getProjects() {
-  const res = await fetch(`http://localhost:8000/database/query`)
+  const res = await fetch(`https://notion-proxy.onrender.com/database/query`)
 
   if (!res.ok) {
     throw new Error("failed to fetch data")
@@ -30,7 +30,7 @@ async function getProjectDetails(params: { slug: string[] }) {
   }
 
   const promisesList = project.detailsId.map((id) =>
-    fetch(`http://localhost:8000/project/${id}`).then((res) => {
+    fetch(`https://notion-proxy.onrender.com/project/${id}`).then((res) => {
       if (res.ok) {
         return res.json()
       }
