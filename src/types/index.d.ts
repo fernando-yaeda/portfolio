@@ -25,4 +25,11 @@ type Project = {
   description: string
   techStack: string[]
   imageUrl?: string
+  detailsId?: string[]
+}
+
+type ProjectDetails = {
+  title: string
+  paragraph: string
+  imageUrl: string
 }

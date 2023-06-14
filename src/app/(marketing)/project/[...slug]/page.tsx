@@ -1,3 +1,4 @@
+import { Project, ProjectDetails } from "@/types"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
@@ -6,77 +7,89 @@ interface ProjectPageProps {
     slug: string[]
   }
 }
-async function getProjectFromParams(params: { slug: string[] }) {
-  const slug = params?.slug?.join("/")
 
-  // const {data} = useQuery({
-  //   queryKey: ['projects'],
-  //   queryFn: () => getProjects()
-  // })
+async function getProjects() {
+  const res = await fetch(`http://localhost:8000/database/query`)
 
-  // if(data) {
-
-  //   const project = data.filter((project => project.title ===))
-  // }
-
-  const project = {
-    blocks: [
-      {
-        title: "project title1",
-        description: "project description",
-        imageUrl: "https://picsum.photos/800/800",
-      },
-      {
-        title: "project title2",
-        description: "project description",
-        imageUrl: "https://picsum.photos/700/700",
-      },
-      {
-        title: "project title3",
-        description: "project description",
-        imageUrl: "https://picsum.photos/1000/1000",
-      },
-    ],
+  if (!res.ok) {
+    throw new Error("failed to fetch data")
   }
 
-  return project
+  return res.json()
+}
+
+async function getProjectDetails(params: { slug: string[] }) {
+  const slug = params?.slug?.join("/")
+  const projectsData = await getProjects()
+  const projects: Project[] = projectsData.projects
+
+  const project = projects.filter((project) => project.title === slug)[0]
+
+  if (!project?.detailsId) {
+    return null
+  }
+
+  const promisesList = project.detailsId.map((id) =>
+    fetch(`http://localhost:8000/project/${id}`).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+    })
+  )
+
+  const details: ProjectDetails[] = await Promise.allSettled(promisesList).then(
+    (res) => {
+      return res
+        .filter((resolved) => resolved.status === "fulfilled")
+        .map(
+          (results) =>
+            //TODO: search the reason why ts is not geting PromiseSettledResult value
+            //@ts-ignore
+            results.value.projectDetails
+        )
+    }
+  )
+
+  return details
 }
 
 export default async function PostPage({ params }: ProjectPageProps) {
-  const project = await getProjectFromParams(params)
+  const projectDetails = await getProjectDetails(params)
 
-  if (!project) {
+  if (!projectDetails) {
     notFound()
   }
 
   return (
     <div className="flex flex-col">
-      {project.blocks.map((block) => (
-        <article
-          key={block.title}
+      {projectDetails.map((projectDetails) => (
+        <section
+          key={projectDetails.title}
           className="flex h-screen flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
         >
           <div className="flex h-1/3 flex-col items-center justify-center gap-4 px-16 lg:h-full lg:w-1/2 lg:flex-1">
-            <h2 className="text-3xl font-bold lg:text-4xl">{block.title}</h2>
+            <h2 className="text-3xl font-bold lg:text-4xl">
+              {projectDetails.title}
+            </h2>
 
             <p className="max-w-[32rem] text-center text-muted-foreground lg:text-lg">
-              {block.description}
+              {projectDetails.paragraph}
             </p>
           </div>
 
           <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">
-            {block.imageUrl && (
+            {projectDetails.imageUrl && (
               <div className="relative h-full w-full rounded-t-2xl drop-shadow-xl lg:rounded-l-2xl">
                 <Image
-                  src={block.imageUrl}
-                  alt={block.title}
+                  src={projectDetails.imageUrl}
+                  alt={projectDetails.title}
                   fill
                   className="rounded-t-2xl object-cover object-left-top lg:rounded-l-2xl"
                 />
               </div>
             )}
           </div>
-        </article>
+        </section>
       ))}
     </div>
   )
