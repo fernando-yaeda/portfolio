@@ -18,9 +18,10 @@ export async function ProjectCard({
   title,
   description,
   techStack,
+  slug,
 }: ProjectCardProps) {
   return (
-    <Link href={`/project/${title}`}>
+    <Link href={`/project/${slug}`}>
       <Card className="cursor-pointer transition-all hover:-translate-y-1 hover:shadow-xl">
         <CardHeader>
           <CardTitle className="font-bold">{title}</CardTitle>

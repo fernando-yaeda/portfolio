@@ -87,6 +87,7 @@ export default async function HomePage() {
                 title={project.title}
                 description={project.description}
                 techStack={project.techStack}
+                slug={project.slug}
               />
             ))}
         </div>

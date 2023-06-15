@@ -25,7 +25,7 @@ async function getProjectDetails(params: { slug: string[] }) {
   const projectsData = await getProjects()
   const projects: Project[] = projectsData.projects
 
-  const project = projects.filter((project) => project.title === slug)[0]
+  const project = projects.filter((project) => project.slug === slug)[0]
 
   if (!project?.detailsId) {
     return null

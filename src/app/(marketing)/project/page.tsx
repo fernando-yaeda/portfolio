@@ -44,7 +44,7 @@ export default async function ProjectPage() {
 
                 <div className="flex justify-center gap-10">
                   <Link
-                    href={`/project/${project.title}`}
+                    href={`/project/${project.slug}`}
                     className={cn(
                       buttonVariants({ variant: "default", size: "lg" })
                     )}
@@ -53,7 +53,7 @@ export default async function ProjectPage() {
                   </Link>
 
                   <Link
-                    href={`/project/${project.title}`}
+                    href={`/project/${project.slug}`}
                     className={cn(
                       buttonVariants({ variant: "default", size: "lg" })
                     )}
@@ -62,7 +62,7 @@ export default async function ProjectPage() {
                   </Link>
 
                   <Link
-                    href={`/project/${project.title}`}
+                    href={`/project/${project.slug}`}
                     className={cn(
                       buttonVariants({ variant: "default", size: "lg" })
                     )}

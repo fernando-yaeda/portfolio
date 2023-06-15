@@ -26,6 +26,7 @@ type Project = {
   techStack: string[]
   imageUrl?: string
   detailsId?: string[]
+  slug: string
 }
 
 type ProjectDetails = {
