@@ -6,13 +6,5 @@ export const marketingConfig: MarketingConfig = {
       title: "Projects",
       href: "/project",
     },
-    {
-      title: "Blog",
-      href: "/blog",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-    },
   ],
 }
