@@ -1,8 +1,11 @@
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Project, ProjectDetails } from "@/types"
 
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/button"
+import { Icons } from "@/components/icons"
 
 interface ProjectPageProps {
   params: {
@@ -63,7 +66,17 @@ export default async function PostPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="relative w-full">
+      <Link
+        href="/project"
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "absolute left-[2.5rem] top-0 hidden space-x-2 md:inline-flex"
+        )}
+      >
+        <Icons.navigateBack className="mr-2 h-4 w-4" />
+        See all projects
+      </Link>
       {projectDetails.map((projectDetails) => (
         <section
           key={projectDetails.title}
