@@ -68,17 +68,20 @@ export default async function PostPage({ params }: ProjectPageProps) {
         <section
           key={projectDetails.title}
           className={cn(
-            projectDetails.title === "Elegant and Effective"
+            projectDetails.desktop
               ? "flex h-screen flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
-              : "flex flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
+              : `flex flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0`
           )}
+          style={{
+            backgroundColor: projectDetails.background,
+          }}
         >
           <div className="flex flex-col items-center justify-center gap-4 px-16 py-14 md:h-1/3 md:py-0 lg:h-full lg:w-1/2 ">
             <h2 className="text-center text-3xl font-bold lg:text-4xl">
               {projectDetails.title}
             </h2>
 
-            <p className="max-w-[32rem] text-center text-muted-foreground lg:text-lg">
+            <p className="max-w-[32rem] text-center font-semibold lg:text-lg">
               {projectDetails.paragraph}
             </p>
           </div>

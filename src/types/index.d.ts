@@ -33,4 +33,5 @@ type ProjectDetails = {
   paragraph: string
   imageUrl: string
   desktop: boolean
+  background?: string
 }
