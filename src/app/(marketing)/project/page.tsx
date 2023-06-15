@@ -2,6 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { Project } from "@/types"
 
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/button"
+
 export const metadata = {
   title: "Projects",
 }
@@ -38,7 +41,12 @@ export default async function ProjectPage() {
                   {project.description}
                 </p>
 
-                <Link href={`/project/${project.title}`}>View Project</Link>
+                <Link
+                  href={`/project/${project.title}`}
+                  className={cn(buttonVariants())}
+                >
+                  Presentation
+                </Link>
               </div>
 
               <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">

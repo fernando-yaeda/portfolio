@@ -19,7 +19,7 @@ async function getProjects() {
 
 export default async function HomePage() {
   const data = await getProjects()
-  const projects: Project[] = data.projects
+  const projects: Project[] = data.projects.slice(0, 6)
 
   return (
     <>
@@ -30,8 +30,8 @@ export default async function HomePage() {
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
             I&apos;m a full stack developer skilled in Javascript/Typescript,
-            ReactJs and NodeJs. I Love building exceptional web applications and
-            constantly expanding my skill set to deliver innovate solutions.
+            ReactJs and NodeJs. I love music, programming and people. Constantly
+            studying and improving my skills to deliver the best solutions.
           </p>
           <div className="space-x-4">
             <Link
