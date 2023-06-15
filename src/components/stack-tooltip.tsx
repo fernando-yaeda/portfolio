@@ -5,15 +5,15 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip"
 
-type TeckStackTooltipProps = {
+type TechStackTooltipProps = {
   trigger: React.ReactNode
   content: React.ReactNode
 }
 
-export default function TeckStackTooltip({
+export default function TechStackTooltip({
   trigger,
   content,
-}: TeckStackTooltipProps) {
+}: TechStackTooltipProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={1}>

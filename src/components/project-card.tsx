@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Project } from "@/types"
 
 import { TechIconByStack } from "./icons"
-import TeckStackTooltip from "./stack-tooltip"
+import TechStackTooltip from "./stack-tooltip"
 import {
   Card,
   CardContent,
@@ -35,7 +35,7 @@ export async function ProjectCard({
             const Icon = TechIconByStack({ stack })
             if (Icon) {
               return (
-                <TeckStackTooltip
+                <TechStackTooltip
                   key={index}
                   trigger={
                     <Icon className="h-5 w-5 text-muted-foreground hover:text-primary" />

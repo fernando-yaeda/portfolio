@@ -4,6 +4,7 @@ import { Project } from "@/types"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/button"
+import TechStackTooltip from "@/components/stack-tooltip"
 
 export const metadata = {
   title: "Projects",
@@ -41,12 +42,34 @@ export default async function ProjectPage() {
                   {project.description}
                 </p>
 
-                <Link
-                  href={`/project/${project.title}`}
-                  className={cn(buttonVariants())}
-                >
-                  Presentation
-                </Link>
+                <div className="flex justify-center gap-10">
+                  <Link
+                    href={`/project/${project.title}`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" })
+                    )}
+                  >
+                    Features
+                  </Link>
+
+                  <Link
+                    href={`/project/${project.title}`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" })
+                    )}
+                  >
+                    Tech Details
+                  </Link>
+
+                  <Link
+                    href={`/project/${project.title}`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" })
+                    )}
+                  >
+                    Live Demo
+                  </Link>
+                </div>
               </div>
 
               <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">
