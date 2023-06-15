@@ -42,34 +42,12 @@ export default async function ProjectPage() {
                   {project.description}
                 </p>
 
-                <div className="flex justify-center gap-10">
-                  <Link
-                    href={`/project/${project.slug}`}
-                    className={cn(
-                      buttonVariants({ variant: "default", size: "lg" })
-                    )}
-                  >
-                    Features
-                  </Link>
-
-                  <Link
-                    href={`/project/${project.slug}`}
-                    className={cn(
-                      buttonVariants({ variant: "default", size: "lg" })
-                    )}
-                  >
-                    Tech Details
-                  </Link>
-
-                  <Link
-                    href={`/project/${project.slug}`}
-                    className={cn(
-                      buttonVariants({ variant: "default", size: "lg" })
-                    )}
-                  >
-                    Live Demo
-                  </Link>
-                </div>
+                <Link
+                  href={`/project/${project.slug}`}
+                  className={cn(buttonVariants())}
+                >
+                  Features
+                </Link>
               </div>
 
               <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">

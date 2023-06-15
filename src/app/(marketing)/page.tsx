@@ -65,7 +65,6 @@ export default async function HomePage() {
               <Icons.mail />
             </Link>
           </div>
-          <Button size="lg">Schedule a meeting</Button>
         </div>
       </section>
       <section

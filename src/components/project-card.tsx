@@ -28,7 +28,9 @@ export async function ProjectCard({
         </CardHeader>
 
         <CardContent>
-          <CardDescription>{description}</CardDescription>
+          <CardDescription className="line-clamp-3">
+            {description}
+          </CardDescription>
         </CardContent>
 
         <CardFooter className="flex gap-4">
