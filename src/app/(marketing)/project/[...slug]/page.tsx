@@ -2,6 +2,8 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { Project, ProjectDetails } from "@/types"
 
+import { cn } from "@/lib/utils"
+
 interface ProjectPageProps {
   params: {
     slug: string[]
@@ -65,10 +67,14 @@ export default async function PostPage({ params }: ProjectPageProps) {
       {projectDetails.map((projectDetails) => (
         <section
           key={projectDetails.title}
-          className="flex h-screen flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
+          className={cn(
+            projectDetails.title === "Elegant and Effective"
+              ? "flex h-screen flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
+              : "flex flex-col px-6 md:h-[calc(100vh-80px)] lg:flex-row lg:px-0"
+          )}
         >
-          <div className="flex h-1/3 flex-col items-center justify-center gap-4 px-16 lg:h-full lg:w-1/2 lg:flex-1">
-            <h2 className="text-3xl font-bold lg:text-4xl">
+          <div className="flex flex-col items-center justify-center gap-4 px-16 py-14 md:h-1/3 md:py-0 lg:h-full lg:w-1/2 ">
+            <h2 className="text-center text-3xl font-bold lg:text-4xl">
               {projectDetails.title}
             </h2>
 
@@ -77,18 +83,30 @@ export default async function PostPage({ params }: ProjectPageProps) {
             </p>
           </div>
 
-          <div className="flex h-2/3 items-end justify-start lg:h-full lg:w-1/2 lg:flex-1 lg:pb-10">
-            {projectDetails.imageUrl && (
-              <div className="relative h-full w-full rounded-t-2xl drop-shadow-xl lg:rounded-l-2xl">
+          {projectDetails.imageUrl && projectDetails.desktop ? (
+            <div className="flex h-full items-end justify-start pb-10 md:h-2/3 md:pb-0 lg:h-full lg:w-1/2 lg:pb-10">
+              <div className="relative -right-6 h-full w-full overflow-hidden rounded-l-2xl rounded-r-none drop-shadow-xl md:-right-0 md:rounded-b-none md:rounded-t-2xl lg:rounded-l-2xl lg:rounded-r-none">
                 <Image
                   src={projectDetails.imageUrl}
                   alt={projectDetails.title}
                   fill
-                  className="rounded-t-2xl object-cover object-left-top lg:rounded-l-2xl"
+                  className="object-cover object-left-top"
                 />
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="flex h-full items-end justify-center px-16 md:h-2/3 md:pt-10 lg:h-full lg:w-1/2 lg:justify-start">
+              <div className="relative h-full overflow-hidden drop-shadow-xl md:h-full">
+                <Image
+                  src={projectDetails.imageUrl}
+                  alt={projectDetails.title}
+                  width={410}
+                  height={864}
+                  className="object-cover object-top lg:rounded-l-2xl"
+                />
+              </div>
+            </div>
+          )}
         </section>
       ))}
     </div>

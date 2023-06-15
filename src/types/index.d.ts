@@ -32,4 +32,5 @@ type ProjectDetails = {
   title: string
   paragraph: string
   imageUrl: string
+  desktop: boolean
 }
